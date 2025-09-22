@@ -12,7 +12,7 @@ jobs:
       HYPESCORE_API_KEY: ${{ secrets.HYPESCORE_API_KEY }}
       MONGO_URI: ${{ secrets.MONGO_URI }}
       ADDRESSES: ${{ secrets.ADDRESSES }}
-      MONGO_DB: mobula
+      MONGO_DB: lapis_develop
       MONGO_COLLECTION: Token
     steps:
       - name: Checkout
