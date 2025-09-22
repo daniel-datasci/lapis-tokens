@@ -6,4 +6,5 @@ lightgbm
 xgboost
 imbalanced-learn
 pymongo
+requests
 dotenv
