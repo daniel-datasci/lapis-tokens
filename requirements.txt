@@ -1,0 +1,9 @@
+pandas
+numpy
+matplotlib
+scikit-learn
+lightgbm
+xgboost
+imbalanced-learn
+pymongo
+dotenv
