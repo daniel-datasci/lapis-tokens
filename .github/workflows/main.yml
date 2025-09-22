@@ -2,7 +2,7 @@ name: Fetch token details hourly
 
 on:
   schedule:
-    - cron: '0 * * * *'  # top of every hour (UTC)
+    - cron: '0 * * * *'   # top of every hour (UTC)
   workflow_dispatch:
 
 jobs:
@@ -11,7 +11,6 @@ jobs:
     env:
       HYPESCORE_API_KEY: ${{ secrets.HYPESCORE_API_KEY }}
       MONGO_URI: ${{ secrets.MONGO_URI }}
-      ADDRESSES: ${{ secrets.ADDRESSES }}
       MONGO_DB: lapis_develop
       MONGO_COLLECTION: Token
     steps:
@@ -21,10 +20,23 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.10.18'
+          python-version: '3.11'
 
-      - name: Install deps
+      - name: Cache pip
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+
+      - name: Install dependencies
         run: python -m pip install --upgrade pip && pip install -r requirements.txt
+
+      - name: Verify deps
+        run: |
+          python -c "import requests, json; print('requests', requests.__version__)"
+          pip freeze
 
       - name: Run fetch script
         run: python get.py
