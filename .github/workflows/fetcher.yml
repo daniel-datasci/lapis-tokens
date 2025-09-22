@@ -1,4 +1,4 @@
-name: Fetch token details hourly
+name: Fetch hourly
 
 on:
   schedule:
